@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import { useAuth } from "@clerk/clerk-expo";
 
-const API_BASE_URL = "https://x-clone-rn-lilac-six.vercel.app/api"
+// const API_BASE_URL = "https://x-clone-rn-lilac-six.vercel.app/api"
+const API_BASE_URL = "http://localhost:5001/api";
 
 // this will basically create an authenticated api, pass the token into our header
 export const createApiClient = (getToken: () => Promise<string | null>):AxiosInstance => {
@@ -27,4 +28,16 @@ export const userApi = {
   syncUser: (api:AxiosInstance) => api.post("/user/sync"),
   getCurrentUser: (api: AxiosInstance) => api.get("/user/me"),
   updateProfile: (api:AxiosInstance, data: any) => api.put("/users/profile", data),
+};
+
+export const postApi = {
+  createPost: (api: AxiosInstance, data: { content: string; image?: string }) => api.post("/posts", data),
+  getPosts: (api: AxiosInstance) => api.get("/posts"),
+  getUserPosts: (api: AxiosInstance, username: string) => api.post(`/posts/user/${username}`),
+  likePost: (api: AxiosInstance, postId: string) => api.post(`/posts/${postId}/like`),
+  deletePost: (api: AxiosInstance, postId: string) => api.delete(`/posts/${postId}`),
+};
+
+export const commentApi = {
+  createComment: (api: AxiosInstance, postId: string, content: string) => api.post(`/comments/post/${postId}`, { content }),
 };
