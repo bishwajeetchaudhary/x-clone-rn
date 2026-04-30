@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from "axios";
 import { useAuth } from "@clerk/clerk-expo";
 
-// const API_BASE_URL = "https://x-clone-rn-lilac-six.vercel.app/api"
-const API_BASE_URL = "http://localhost:5001/api";
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || "https://x-clone-rn-lilac-six.vercel.app/api";
+// const API_BASE_URL = "http://localhost:5001/api";
 
 // this will basically create an authenticated api, pass the token into our header
 export const createApiClient = (getToken: () => Promise<string | null>):AxiosInstance => {
