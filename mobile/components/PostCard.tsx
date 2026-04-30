@@ -7,6 +7,7 @@ interface PostCardProps {
   post: Post;
   onLike: (postId: string) => void;
   onDelete: (postId: string) => void;
+  onComment: (post: Post) => void;
   isLiked: boolean;
   currentUser: User;
 }
@@ -17,6 +18,7 @@ const PostCard = ({
   onLike,
   post,
   isLiked,
+  onComment,
 }: PostCardProps) => {
   const isOwnPost = post.user._id === currentUser._id;
 
